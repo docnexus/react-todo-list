@@ -2,7 +2,7 @@ import React from "react";
 import List from "./List";
 
 function App() {
-  const [items, setItems] = React.useState(["A Item"]);
+  const [items, setItems] = React.useState([]);
   const [enteredItem, setEnteredItem] = React.useState("");
 
   function handleInput(event) {
@@ -11,6 +11,7 @@ function App() {
 
   function handleSubmit() {
     setItems((items => ([...items, [enteredItem]])))
+    setEnteredItem("");
   }
   
 
