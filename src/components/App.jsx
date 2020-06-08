@@ -1,28 +1,23 @@
 import React from "react";
 import List from "./List";
+import InputArea from "./InputArea";
 
 function App() {
   const [items, setItems] = React.useState([]);
-  const [enteredItem, setEnteredItem] = React.useState("");
 
-  function handleInput(event) {
-    setEnteredItem(event.target.value);
+  function handleSubmit(item) {
+    console.log(item);
+
+    setItems((items) => [...items, [item]]);
   }
 
-  function handleSubmit() {
-    setItems((items) => [...items, [enteredItem]]);
-    setEnteredItem("");
-  }
-
-  function deleteItem(id){
+  function deleteItem(id) {
     console.log("deleted " + id);
-    setItems(prevItems => {
-      return prevItems.filter(
-        (item, index) => {
-return index !== id;
-        }
-      );
-    })
+    setItems((prevItems) => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
   }
 
   return (
@@ -30,17 +25,7 @@ return index !== id;
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input
-          type="text"
-          placeholder="Enter a new item"
-          value={enteredItem}
-          onChange={handleInput}
-        />
-        <button onClick={handleSubmit}>
-          <span>Add</span>
-        </button>
-      </div>
+      <InputArea onClick={handleSubmit} />
       <div>
         <ul>
           {items.map((items, index) => (
