@@ -10,10 +10,20 @@ function App() {
   }
 
   function handleSubmit() {
-    setItems((items => ([...items, [enteredItem]])))
+    setItems((items) => [...items, [enteredItem]]);
     setEnteredItem("");
   }
-  
+
+  function deleteItem(id){
+    console.log("deleted " + id);
+    setItems(prevItems => {
+      return prevItems.filter(
+        (item, index) => {
+return index !== id;
+        }
+      );
+    })
+  }
 
   return (
     <div className="container">
@@ -33,8 +43,8 @@ function App() {
       </div>
       <div>
         <ul>
-          {items.map((items) => (
-            <List items={items} />
+          {items.map((items, index) => (
+            <List key={index} id={index} items={items} onChecked={deleteItem} />
           ))}
           ;
         </ul>

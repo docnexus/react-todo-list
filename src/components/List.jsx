@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
 function List(props) {
-    return (
-        <li>{props.items} </li>
-    )
+
+  return <li onClick= {() => { props.onChecked(props.id);}}>{props.items} </li>;
 }
 
 export default List;
